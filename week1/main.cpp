@@ -28,6 +28,10 @@ int main() {
     std::pair<float, float> minMax = findMinMax(data);
 
     printf("\nMin: %f Max: %f", minMax.first, minMax.second);
-
+    
+    size_t input;
+    printf("\nGive number of bins (N): ");
+    std::cin >> input;
+    
     return 0;
 }
