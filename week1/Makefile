@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O0
 
-TARGET = main
+TARGET = oef1
  
 all:
 	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).cpp
