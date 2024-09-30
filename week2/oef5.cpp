@@ -14,24 +14,25 @@ typedef struct Entry
 int main(int argc, char *argv[]) {
     size_t arraySize = std::stoul(argv[1]);
     std::vector<Entry> entries(arraySize);
-    printf("Iterating %d times\n", arraySize);
     for (size_t i = 0; i < entries.size(); ++i) {
         entries[i].next = &entries[(i + 1) % entries.size()]; 
     }
 
-    AutoAverageTimer timer("Iterating circular list");
 
     const size_t steps = 2e7;
+    const size_t batchSize = 100;
+    printf("Iterating %d times averaged over %d measurements\n", arraySize, batchSize);
+    AutoAverageTimer timer("Iterating circular list");
+    for (size_t i = 0; i < batchSize ; ++i){
+        timer.start();
 
-    timer.start();
+        Entry* current = &entries[0];
+        for (size_t j = 0; j < steps; ++j) {
+            current = current->next;
+        }
 
-    Entry* current = &entries[0];
-    for (size_t i = 0; i < steps; ++i) {
-        current = current->next;
+        timer.stop();
     }
-    
-    timer.stop();
-
     timer.report(std::cout);
     
     return 0;
