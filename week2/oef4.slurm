@@ -1,7 +1,8 @@
 #! /bin/bash -l
-#SBATCH --cluster=wise
+#SBATCH --cluster=wice
 #SBATCH --account=lp_h_pds_iiw
 #SBATCH --nodes=1
+#SBATCH --core-spec=8
 #SBATCH --ntasks-per-node=72
 #SBATCH --time=00:10:00
 #SBATCH --error="%x.e%A"
