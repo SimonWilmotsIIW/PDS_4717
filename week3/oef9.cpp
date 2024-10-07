@@ -20,22 +20,24 @@ int main(int argc, char *argv[]) {
     }
 
     // first I implemented with float* but then I remembered std::vector is a thing
-    std::vector<float> array(ARRAY_SIZE, rank);
-    std::vector<float> received(ARRAY_SIZE, rank);
+    // I first also implemented this with a single vector
+    // This caused a race condition when one process will overwrite the array of the other
+    std::vector<float> received_0(ARRAY_SIZE, rank);
+    std::vector<float> received_1(ARRAY_SIZE, rank);
 
+    // find rank of other process
     int otherProcess = (rank == 0) ? 1 : 0;
 
     if (rank == 0) {
-        MPI_Send(array.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
-        //MPI_Ssend(array.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
-        MPI_Recv(received.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        //MPI_Send(received_0.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
+        MPI_Ssend(received_0.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
+        MPI_Recv(received_1.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("I am process %d and I have received b(0) = %f\n", rank, received_1[0]);
     }     else {
-        MPI_Recv(array.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        MPI_Send(received.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
-        //MPI_Ssend(array.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
+        MPI_Recv(received_0.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        //MPI_Send(received_1.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
+        MPI_Ssend(received_1.data(), ARRAY_SIZE, MPI_FLOAT, otherProcess, 0, MPI_COMM_WORLD);
+        printf("I am process %d and I have received b(0) = %f\n", rank, received_0[0]);
     }
-
-    printf("I am process %d and I have received b(0) = %f\n", rank, received[0]);
-    
     MPI_Finalize();
 }
