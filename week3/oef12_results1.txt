@@ -1,0 +1,23 @@
+SLURM_JOB_ID: 62503637
+SLURM_JOB_USER: vsc36726
+SLURM_JOB_ACCOUNT: lp_h_pds_iiw
+SLURM_JOB_NAME: oef12.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: l33c32n4
+SLURM_JOB_CPUS_PER_NODE: 2
+Date: Tue Oct  8 19:32:18 CEST 2024
+Walltime: 00-01:00:00
+========================================================================
+buffer_size (bytes) = 1, duration (us) = 0.485901
+buffer_size (bytes) = 2, duration (us) = 0.48457
+buffer_size (bytes) = 4, duration (us) = 0.481226
+buffer_size (bytes) = 8, duration (us) = 0.479175
+buffer_size (bytes) = 16, duration (us) = 0.48009
+buffer_size (bytes) = 32, duration (us) = 0.559839
+buffer_size (bytes) = 64, duration (us) = 0.51825
+buffer_size (bytes) = 128, duration (us) = 0.922156
+buffer_size (bytes) = 256, duration (us) = 1.02689
+buffer_size (bytes) = 512, duration (us) = 1.10449
+buffer_size (bytes) = 1024, duration (us) = 1.27671
