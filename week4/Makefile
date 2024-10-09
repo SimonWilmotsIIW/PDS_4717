@@ -1,10 +1,10 @@
-CC = g++
-CFLAGS = -std=c++11 -lpthread
+CC = gcc
+CFLAGS = -lpthread -lm
 
-TARGET = codesnippets_threads_student/mt
+TARGET = oef14
  
 all:
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).cpp
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
  
 clean:
 	$(RM) $(TARGET)
