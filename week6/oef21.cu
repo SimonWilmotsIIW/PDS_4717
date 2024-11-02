@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cuda_runtime.h>
 
-#define ARRAY_SIZE = 500;
-#define BLOCK_COUNT = 16;
+#define ARRAY_SIZE 500;
+#define BLOCK_COUNT 16;
 #define THREADS_PER_BLOCK (ARRAY_SIZE + BLOCK_COUNT - 1) / BLOCK_COUNT;
 
 __global__ void writeBlockIndex(int *blockIndexArray) {
