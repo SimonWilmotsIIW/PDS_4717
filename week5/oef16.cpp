@@ -1,16 +1,10 @@
 #include <stdio.h>
 #include <omp.h>
 
-int main() {
-    // Stel het aantal threads in als gewenst, of laat OpenMP dit bepalen
-    #pragma omp parallel
+int main(int argc, char *argv[]) {
+    #pragma omp parallel                   
     {
-        // Verkrijg de thread ID
-        int thread_id = omp_get_thread_num();
-        
-        // Print een boodschap voor elke thread
-        printf("Hello World from thread %d\n", thread_id);
-    }
-    
+        printf("Hello World... from thread = %d\n", omp_get_thread_num());
+    } 
     return 0;
 }
